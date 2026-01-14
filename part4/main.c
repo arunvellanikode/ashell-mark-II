@@ -91,7 +91,7 @@ char *read_cmd(void)
         }
         if(!ptr)
         {
-            fprintf(stderr, "error: failed to alloc buffer: %s\n", strerror(errno));
+            fprintf(stderr, "ashell error: failed to alloc buffer: %s\n", strerror(errno));
             return NULL;
         }
         strcpy(ptr+ptrlen, buf);

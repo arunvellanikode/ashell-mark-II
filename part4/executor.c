@@ -190,7 +190,7 @@ int do_simple_command(struct node_s *node)
     if((child_pid = fork()) == 0)
     {
         do_exec_cmd(argc, argv);
-        fprintf(stderr, "error: failed to execute command: %s\n", strerror(errno));
+        fprintf(stderr, "ashell error: failed to execute command: %s\n", strerror(errno));
         if(errno == ENOEXEC)
         {
             exit(126);
@@ -206,7 +206,7 @@ int do_simple_command(struct node_s *node)
     }
     else if(child_pid < 0)
     {
-        fprintf(stderr, "error: failed to fork command: %s\n", strerror(errno));
+        fprintf(stderr, "ashell error: failed to fork command: %s\n", strerror(errno));
         return 0;
     }
 

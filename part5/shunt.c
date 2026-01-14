@@ -202,7 +202,7 @@ long eval_div(struct stack_item_s *a1, struct stack_item_s *a2)
     long n2 = long_value(a2);
     if(!n2)
     {
-        fprintf(stderr, "error: Division by zero\n");
+        fprintf(stderr, "ashell error: Division by zero\n");
         error = 1;
         return 0;
     }
@@ -215,7 +215,7 @@ long eval_mod(struct stack_item_s *a1, struct stack_item_s *a2)
     long n2 = long_value(a2);
     if(!n2)
     {
-        fprintf(stderr, "error: Division by zero\n");
+        fprintf(stderr, "ashell error: Division by zero\n");
         error = 1;
         return 0;
     }
@@ -660,7 +660,7 @@ void push_opstack(struct op_s *op)
 {
     if(nopstack>MAXOPSTACK-1)
     {
-        fprintf(stderr, "error: Operator stack overflow\n");
+        fprintf(stderr, "ashell error: Operator stack overflow\n");
         error = 1;
         return;
     }
@@ -675,7 +675,7 @@ struct op_s *pop_opstack(void)
 {
     if(!nopstack)
     {
-        fprintf(stderr, "error: Operator stack empty\n");
+        fprintf(stderr, "ashell error: Operator stack empty\n");
         error = 1;
         return NULL;
     }
@@ -690,7 +690,7 @@ void push_numstackl(long val)
 {
     if(nnumstack > MAXNUMSTACK-1)
     {
-        fprintf(stderr, "error: Number stack overflow\n");
+        fprintf(stderr, "ashell error: Number stack overflow\n");
         error = 1;
         return;
     }
@@ -707,7 +707,7 @@ void push_numstackv(struct symtab_entry_s *val)
 {
     if(nnumstack > MAXNUMSTACK-1)
     {
-        fprintf(stderr, "error: Number stack overflow\n");
+        fprintf(stderr, "ashell error: Number stack overflow\n");
         error = 1;
         return;
     }
@@ -724,7 +724,7 @@ struct stack_item_s pop_numstack(void)
 {
     if(!nnumstack)
     {
-        fprintf(stderr, "error: Number stack empty\n");
+        fprintf(stderr, "ashell error: Number stack empty\n");
         error = 1;
         return (struct stack_item_s) { };
     }
@@ -785,7 +785,7 @@ void shunt_op(struct op_s *op)
         }
         if(!(pop = pop_opstack()) || pop->op != '(')
         {
-            fprintf(stderr, "error: Stack error. No matching \'(\'\n");
+            fprintf(stderr, "ashell error: Stack error. No matching \'(\'\n");
             error = 1;
         }
         return;
@@ -942,7 +942,7 @@ int get_ndigit(char c, int base, int *result)
 
 invalid:
     /* invalid digit */
-    fprintf(stderr, "error: digit %c exceeds the value of the base %d\n", c, base);
+    fprintf(stderr, "ashell error: digit %c exceeds the value of the base %d\n", c, base);
     error = 1;
     return 0;
 }
@@ -1111,7 +1111,7 @@ char *arithm_expand(char *orig_expr)
     char *baseexp = malloc(baseexp_len+1);
     if(!baseexp)
     {
-        fprintf(stderr, "error: insufficient memory for arithmetic expansion\n");
+        fprintf(stderr, "ashell error: insufficient memory for arithmetic expansion\n");
         return NULL;
     }
     /* lose the $(( */
@@ -1157,7 +1157,7 @@ char *arithm_expand(char *orig_expr)
                     }
                     else if(op->op != '(' && !op->unary)
                     {
-                        fprintf(stderr, "error: illegal use of binary operator (%c)\n", op->op);
+                        fprintf(stderr, "ashell error: illegal use of binary operator (%c)\n", op->op);
                         goto err;
                     }
                 }
@@ -1196,7 +1196,7 @@ char *arithm_expand(char *orig_expr)
             }
             else
             {
-                fprintf(stderr, "error: Syntax error near: %s\n", expr);
+                fprintf(stderr, "ashell error: Syntax error near: %s\n", expr);
                 goto err;
             }
         }
@@ -1228,7 +1228,7 @@ char *arithm_expand(char *orig_expr)
                 struct symtab_entry_s *n1 = get_var(tstart, &n2);
                 if(!n1)
                 {
-                    fprintf(stderr, "error: Failed to add symbol near: %s\n", tstart);
+                    fprintf(stderr, "ashell error: Failed to add symbol near: %s\n", tstart);
                     goto err;
                 }
                 error = 0;
@@ -1283,7 +1283,7 @@ char *arithm_expand(char *orig_expr)
             }
             else
             {
-                fprintf(stderr, "error: Syntax error near: %s\n", expr);
+                fprintf(stderr, "ashell error: Syntax error near: %s\n", expr);
                 goto err;
             }
         }
@@ -1354,7 +1354,7 @@ char *arithm_expand(char *orig_expr)
     /* we must have only 1 item on the stack now */
     if(nnumstack != 1)
     {
-        fprintf(stderr, "error: Number stack has %d elements after evaluation. Should be 1.\n", nnumstack);
+        fprintf(stderr, "ashell error: Number stack has %d elements after evaluation. Should be 1.\n", nnumstack);
         goto err;
     }
 

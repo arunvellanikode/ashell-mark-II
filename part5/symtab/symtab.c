@@ -40,7 +40,7 @@ void init_symtab(void)
     
     if(!global_symtab)
     {
-        fprintf(stderr, "fatal error: no memory for global symbol table\n");
+        fprintf(stderr, "fatal ashell error: no memory for global symbol table\n");
         exit(EXIT_FAILURE);
     }
     
@@ -58,7 +58,7 @@ struct symtab_s *new_symtab(int level)
     
     if(!symtab)
     {
-        fprintf(stderr, "fatal error: no memory for new symbol table\n");
+        fprintf(stderr, "fatal ashell error: no memory for new symbol table\n");
         exit(EXIT_FAILURE);
     }
     
@@ -146,7 +146,7 @@ struct symtab_entry_s *add_to_symtab(char *symbol)
     
     if(!entry)
     {
-        fprintf(stderr, "fatal error: no memory for new symbol table entry\n");
+        fprintf(stderr, "fatal ashell error: no memory for new symbol table entry\n");
         exit(EXIT_FAILURE);
     }
     
@@ -155,7 +155,7 @@ struct symtab_entry_s *add_to_symtab(char *symbol)
     
     if(!entry->name)
     {
-        fprintf(stderr, "fatal error: no memory for new symbol table entry\n");
+        fprintf(stderr, "fatal ashell error: no memory for new symbol table entry\n");
         exit(EXIT_FAILURE);
     }
     
@@ -239,7 +239,7 @@ void symtab_entry_setval(struct symtab_entry_s *entry, char *val)
         }
         else
         {
-            fprintf(stderr, "error: no memory for symbol table entry's value\n");
+            fprintf(stderr, "ashell error: no memory for symbol table entry's value\n");
         }
     
     	entry->val = val2;

@@ -314,7 +314,7 @@ char *substitute_str(char *s1, char *s2, size_t start, size_t end)
     char *final = malloc(totallen+1);
     if(!final)
     {
-        fprintf(stderr, "error: insufficient memory to perform variable substitution\n");
+        fprintf(stderr, "ashell error: insufficient memory to perform variable substitution\n");
         return NULL;
     }
     if(!totallen)       /* empty string */
@@ -526,7 +526,7 @@ struct word_s *word_expand(char *orig_word)
                 
 		if(!tmp)
                 {
-                    fprintf(stderr, "error: insufficient memory for internal buffers\n");
+                    fprintf(stderr, "ashell error: insufficient memory for internal buffers\n");
                     break;
                 }
                 
@@ -691,7 +691,7 @@ struct word_s *word_expand(char *orig_word)
         /* error making word struct */
         if(!words)
         {
-            fprintf(stderr, "error: insufficient memory\n");
+            fprintf(stderr, "ashell error: insufficient memory\n");
             free(pstart);
             return NULL;
         }
@@ -844,7 +844,7 @@ char *var_expand(char *orig_var_name)
         /* use of '#' should come with omission of ':' */
         if(strchr(orig_var_name, ':'))
         {
-            fprintf(stderr, "error: invalid variable substitution: %s\n", orig_var_name);
+            fprintf(stderr, "ashell error: invalid variable substitution: %s\n", orig_var_name);
             return INVALID_VAR;
         }
         get_length = 1;
@@ -923,11 +923,11 @@ char *var_expand(char *orig_var_name)
                 case '?':          /* print error msg if variable is null/unset */
                     if(sub[1] == '\0')
                     {
-                        fprintf(stderr, "error: %s: parameter not set\n", var_name);
+                        fprintf(stderr, "ashell error: %s: parameter not set\n", var_name);
                     }
                     else
                     {
-                        fprintf(stderr, "error: %s: %s\n", var_name, sub+1);
+                        fprintf(stderr, "ashell error: %s: %s\n", var_name, sub+1);
                     }
                     return INVALID_VAR;
 
@@ -1139,7 +1139,7 @@ char *command_substitute(char *orig_cmd)
     
     if(!cmd)
     {
-        fprintf(stderr, "error: insufficient memory to perform command substitution\n");
+        fprintf(stderr, "ashell error: insufficient memory to perform command substitution\n");
         return NULL;
     }
     
@@ -1187,7 +1187,7 @@ char *command_substitute(char *orig_cmd)
     if(!fp)
     {
         free(cmd2);
-        fprintf(stderr, "error: failed to open pipe: %s\n", strerror(errno));
+        fprintf(stderr, "ashell error: failed to open pipe: %s\n", strerror(errno));
         return NULL;
     }
 
@@ -1253,7 +1253,7 @@ fin:
     
     if(!buf)
     {
-        fprintf(stderr, "error: insufficient memory to perform command substitution\n");
+        fprintf(stderr, "ashell error: insufficient memory to perform command substitution\n");
     }
     
     return buf;
@@ -1512,7 +1512,7 @@ struct word_s *field_split(char *str)
     
     		    if(!tmp)
                     {
-                        fprintf(stderr, "error: insufficient memory for field splitting\n");
+                        fprintf(stderr, "ashell error: insufficient memory for field splitting\n");
                         return first_field;
                     }
     

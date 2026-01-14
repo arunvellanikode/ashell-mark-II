@@ -176,7 +176,7 @@ struct token_s *tokenize(struct source_s *src)
     struct token_s *tok = create_token(tok_buf);
     if(!tok)
     {
-        fprintf(stderr, "error: failed to alloc buffer: %s\n", strerror(errno));
+        fprintf(stderr, "ashell error: failed to alloc buffer: %s\n", strerror(errno));
         return &eof_token;
     }
 
