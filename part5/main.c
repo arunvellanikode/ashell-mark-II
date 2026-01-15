@@ -30,6 +30,8 @@
 #include "parser.h"
 #include "executor.h"
 
+#define HISTORY_SIZE 100
+
 // History Implementation. Experimental
 char *history[HISTORY_SIZE];
 int history_count = 0;
